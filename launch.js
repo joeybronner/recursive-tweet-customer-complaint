@@ -15,6 +15,16 @@ var T = new Twit({
     timeout_ms:           twitterSettings.get().timeout_ms
 });
 
+// Load tweets from DB
+var sSellerTwitterAccount = '@customerid';
+var sNumCommande = 'XXXXXXXXXXXXX';
+
+var aListOfTweets = [
+	'A example of tweet with a mention to ' + sSellerTwitterAccount,
+	'Another one...  ' + sSellerTwitterAccount,
+	'etc...  ' + sSellerTwitterAccount,
+];
+
 
 // Load the DB
 var filebuffer = fs.readFileSync('db/tweets.sqlite');
@@ -27,11 +37,10 @@ schedule.scheduleJob('*/180 * * * *', function () {
 	print('\n\r-------------------- ' + getNowDateTimeInFrench() + ' ----------------------');
 
 	// Get the first tweet in the queue
-	var aTweets = db.exec('SELECT * FROM tweets ORDER BY id ASC')[0].values;
-	var iNbOfTweets = aTweets.length;
+	var iNbOfTweets = aListOfTweets.length;
 	var iRandomNumber = getRandomInt(0, iNbOfTweets);
 	
-	var sTweet = aTweets[iRandomNumber][1];
+	var sTweet = aListOfTweets[iRandomNumber];
 	print(sTweet);
 
 	// It's time to post new tweet
