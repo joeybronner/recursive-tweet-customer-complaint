@@ -35,7 +35,6 @@ schedule.scheduleJob('*/180 * * * *', function () {
 	print(sTweet);
 
 	// It's time to post new tweet
-	//T.post('statuses/update', { status: sTweet }, function(err, data, response) {
 	T.post('statuses/update', { status: sTweet }, function(err, data, response) {
         if (err) {
             print('    Error: ' + err);
